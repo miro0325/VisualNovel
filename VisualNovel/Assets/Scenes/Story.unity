@@ -1966,8 +1966,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: YUZU
-  Name: "\uC804\uC5F4\uB85C\uB9AC"
-  Nickname: "\uC720\uCE58\uC6D0\uC0DD"
+  Name: "\uC18C\uB140"
+  Nickname: AI
   emotionPos: {fileID: 1453057789}
   faces:
   - {fileID: 355512375}
