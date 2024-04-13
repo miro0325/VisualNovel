@@ -127,52 +127,46 @@ public class StoryManager : MonoBehaviour
 
     private MOTION ParseMotion(string value)
     {
-        string txt = value;
-
-        if (value.Contains("/")) txt = value.Split('/')[0]; 
-
+        string txt = SplitSlash(value);
         MOTION motion = (MOTION)Enum.Parse(typeof(MOTION), txt);
         return motion;
     }
 
     private EFFECT ParseEffect(string value)
     {
-        string txt = value;
-
-        if (value.Contains("/")) txt = value.Split('/')[0];
+        string txt = SplitSlash(value);
         EFFECT effect = (EFFECT)Enum.Parse(typeof(EFFECT), txt);
         return effect;
     }
 
     private BG ParseBG(string value)
     {
-        string txt = value;
-
-        if (value.Contains("/")) txt = value.Split('/')[0];
+        string txt = SplitSlash(value);
         BG bg = (BG)Enum.Parse(typeof(BG), txt);
         return bg;
     }
 
     private SCREEN ParseScreen(string value)
     {
-        string txt = value;
-
-        if (value.Contains("/")) txt = value.Split('/')[0];
+        string txt = SplitSlash(value);
         SCREEN screen = (SCREEN)Enum.Parse(typeof(SCREEN), txt);
         return screen;
     }
 
     private MUSIC ParseMusic(string value)
     {
-        string txt = value;
-
-        if (value.Contains("/")) txt = value.Split('/')[0];
+        string txt = SplitSlash(value);
         MUSIC music = (MUSIC)Enum.Parse(typeof(MUSIC), txt);
         return music;
     }
 
+    private string SplitSlash(string txt)
+    {
+        if(txt.Contains("/")) txt = txt.Split('/')[0];
+        return txt;
+    }
 
-    // Update is called once per frame
+
     void Update()
     {
         EndTyping();
@@ -208,16 +202,6 @@ public class StoryManager : MonoBehaviour
             curIndex++;
             yield return StartCoroutine(WaitScreen());
         }
-            //while (curNumber < int.Parse(curStory[curIndex]["NUMBER"].ToString()))
-            //{
-            //    //Debug.Log(int.Parse(curStory[curIndex]["NUMBER"].ToString()));
-                
-
-
-            //}
-        
-        
-        
     }
 
     IEnumerator ScreenStart()
@@ -403,8 +387,8 @@ public class StoryManager : MonoBehaviour
             _e = _e.Split('/')[0];
         }
         
-        MOTION m = (MOTION)ParseMotion(_m);
-        EFFECT e = (EFFECT)ParseEffect(_e);
+        MOTION m = ParseMotion(_m);
+        EFFECT e = ParseEffect(_e);
         string id = curStory[curIndex]["TARGET"].ToString();
         if(!m.Equals(null)) PlayMotion(id,m,m_Index);
         if (!e.Equals(null)) PlayEffect(id, e, e_Index);
@@ -472,11 +456,9 @@ public class StoryManager : MonoBehaviour
         Debug.Log("delay");
         if(prevType == TYPE.TEXT && prevStr != "NONE" && curStory.Count >= curIndex)
         {
-            //Debug.Log("s");
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space) && DialogueText.Instance.IsTypingEnd());
         } else
         {
-            //Debug.Log(curStory[curIndex]["DELAY"].ToString());
             yield return new WaitForSeconds(float.Parse(curStory[curIndex]["DELAY"].ToString()));
             if (prevType == TYPE.BG) Debug.Log("Yes");
         }

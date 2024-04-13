@@ -50,7 +50,7 @@ public class SheetImporter : MonoBehaviour
             yield return www.SendWebRequest();
             if(www.isDone)
             {
-                ParseData(www.downloadHandler.text);
+                ImportData(www.downloadHandler.text);
                 
             }
                 
@@ -59,7 +59,7 @@ public class SheetImporter : MonoBehaviour
         
     }
     
-    private void ParseData(string data)
+    private void ImportData(string data)
     {
         if (string.IsNullOrEmpty(data)) return;
         string[] lines = data.Trim().Split('\n');

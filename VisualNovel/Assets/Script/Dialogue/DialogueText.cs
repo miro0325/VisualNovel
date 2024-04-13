@@ -28,7 +28,7 @@ public class DialogueText : MonoBehaviour
 
     public bool IsTypingEnd()
     {
-        return isTypingEnd;
+        return isTypingEnd; 
     }
 
 
