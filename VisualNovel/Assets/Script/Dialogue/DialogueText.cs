@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
+using System.Text;
 
 public class DialogueText : MonoBehaviour
 {
@@ -46,6 +47,7 @@ public class DialogueText : MonoBehaviour
         int currentChar = 0;
         charTime = timeForChar;
         int charLength = chars.Length;
+        StringBuilder stringBuilder = new StringBuilder(); 
         isTypingEnd = false;
         text.text = "";
         while(currentChar < charLength)
@@ -56,7 +58,8 @@ public class DialogueText : MonoBehaviour
                 timer-=Time.deltaTime;
             }else
             {
-                text.text += chars[currentChar].ToString();
+                stringBuilder.Append(chars[currentChar].ToString());
+                text.text = stringBuilder.ToString();
                 currentChar++;
                 timer = charTime;
             }
